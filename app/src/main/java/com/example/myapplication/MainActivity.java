@@ -7,20 +7,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-    RecyclerView recyclerView;
-    ProductAdapter productAdapter;
-    ArrayList<Product> productList;
+    private RecyclerView recyclerView;
+    private ProductAdapter productAdapter;
+    private ArrayList<Product> productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Убедитесь, что идентификатор совпадает с тем, что в файле макета
         recyclerView = findViewById(R.id.recyclerView);
+        if (recyclerView == null) {
+            throw new NullPointerException("RecyclerView is null. Check your layout file.");
+        }
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Example product list
         productList = new ArrayList<>();
         productList.add(new Product("Product 1", "Description 1", R.drawable.product1));
         productList.add(new Product("Product 2", "Description 2", R.drawable.product2));
