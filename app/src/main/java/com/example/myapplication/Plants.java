@@ -1,11 +1,11 @@
 package com.example.myapplication;
 
-public class Product {
+public class Plants {
     private String name;
     private String description;
     private int imageResource;
 
-    public Product(String name, String description, int imageResource) {
+    public Plants(String name, String description, int imageResource) {
         this.name = name;
         this.description = description;
         this.imageResource = imageResource;

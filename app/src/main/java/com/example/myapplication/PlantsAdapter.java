@@ -10,13 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.ProductViewHolder> {
     private Context context;
-    private ArrayList<Product> productList;
+    private ArrayList<Plants> plantsList;
 
-    public ProductAdapter(Context context, ArrayList<Product> productList) {
+    public PlantsAdapter(ArrayList<Plants> plantsList) {
         this.context = context;
-        this.productList = productList;
+        this.plantsList = plantsList;
     }
 
     @NonNull
@@ -28,15 +28,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        Product product = productList.get(position);
-        holder.textViewName.setText(product.getName());
-        holder.textViewDescription.setText(product.getDescription());
-        holder.imageView.setImageResource(product.getImageResource());
+        Plants plants = plantsList.get(position);
+        holder.textViewName.setText(plants.getName());
+        holder.textViewDescription.setText(plants.getDescription());
+        holder.imageView.setImageResource(plants.getImageResource());
     }
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return plantsList.size();
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
