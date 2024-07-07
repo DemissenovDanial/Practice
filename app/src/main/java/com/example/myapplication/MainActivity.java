@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,8 +27,28 @@ public class MainActivity extends AppCompatActivity {
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Realm.init(this);
+        Realm realm = Realm.getDefaultInstance();
+
         plantsList = new ArrayList<>();
-        plantsAdapter = new PlantsAdapter(plantsList);
+        RealmResults<Plants> results = realm.where(Plants.class).findAll();
+        plantsList.addAll(realm.copyFromRealm(results));
+
+        plantsAdapter = new PlantsAdapter(this, plantsList);
         recyclerView.setAdapter(plantsAdapter);
+    }
+
+    private void addPlantToRealm(Plants plant) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(r -> {
+            r.insert(plant);
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Realm.getDefaultInstance().close();
     }
 }

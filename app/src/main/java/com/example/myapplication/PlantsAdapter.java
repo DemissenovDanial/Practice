@@ -14,7 +14,7 @@ public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.ProductVie
     private Context context;
     private ArrayList<Plants> plantsList;
 
-    public PlantsAdapter(ArrayList<Plants> plantsList) {
+    public PlantsAdapter(Context context, ArrayList<Plants> plantsList) {
         this.context = context;
         this.plantsList = plantsList;
     }
